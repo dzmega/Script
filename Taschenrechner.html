@@ -1,0 +1,148 @@
+
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taschenrechner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
+    <style>
+        body{
+            background-color: rgb(26, 26, 26);
+            font-family: 'Kdam Thmor Pro', sans-serif;
+            color: white;
+        }
+        table{
+            margin-top: 150px;
+            width: 350px;
+            height: 550px;
+            background-color: rgb(26, 26, 26);
+            border: 2px solid white;
+            border-radius: 10px;
+            padding: 5px;
+        }
+        button{
+            width: 75px;
+            height: 75px;
+            border-radius: 25px;
+            font-family: 'Kdam Thmor Pro', sans-serif;
+            font-size: 16px;
+            transition-duration: 0.3s;
+            box-shadow: 0 5px #999;
+        }
+        button:hover{
+            background-color: rgb(185, 227, 255);
+        }
+        button:active{
+            background-color: rgb(185, 227, 255);
+            transform: translateY(3px);
+            box-shadow: 0 3px #777;
+        }
+        #del{
+            background-color: rgb(255, 93, 93);
+        }
+        #del:hover{
+            background-color: rgb(236, 53, 53);
+        }
+        #del:active{
+            background-color: rgb(236, 53, 53);
+            transform: translateY(3px);
+            box-shadow: 0 3px #777;
+        }
+        #gleich{
+            width: 340px;
+            background-color: rgb(255, 255, 164);
+        }
+        #gleich:hover{
+            background-color: rgb(248, 248, 105);
+        }
+        #gleich:active{
+            background-color: rgb(248, 248, 105);
+            transform: translateY(3px);
+            box-shadow: 0 3px #777;
+        }
+        #ergebnis{
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            width: 350px;
+            height: 75px;
+            color: white;
+            font-size: 24px;
+            background-color: rgb(37, 37, 133);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        #back{
+            position: fixed;
+            bottom: 1.25rem; left: 1.25rem;
+        }
+    </style>
+    <script>
+        function enter(number){
+            let werte=document.getElementById("ergebnis");
+            let safe=document.getElementById("ergebnis").innerHTML;
+            document.getElementById("ergebnis").innerHTML+=number;
+            if((safe.slice(-1)==".")&&(number==".")){
+                werte.innerHTML=werte.innerHTML.slice(0, -1);
+            }
+        }
+        function rechnen(){
+            werte=document.getElementById("ergebnis");
+            //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval
+            var result=eval(werte.innerHTML);
+            werte.innerHTML=result;
+            check=false;
+        }
+        function entfernen(){
+            let werte=document.getElementById("ergebnis");
+            //https://www.mediaevent.de/javascript/array-slice.html
+            werte.innerHTML=werte.innerHTML.slice(0, -1);
+        }
+    </script>
+</head>
+<body>
+    <center><h2>Taschenrechner</h2></center>
+    <center>
+        <div id="anwendung">
+            <table>
+                <tr>
+                    <td colspan="4"><div id="ergebnis"></div></td>
+                </tr>
+                <tr>
+                    <td><button onclick="enter(7)">7</button></td>
+                    <td><button onclick="enter(8)">8</button></td>
+                    <td><button onclick="enter(9)">9</button></td>
+                    <td><button id="del" onclick="entfernen()">DEL</button></td>
+                </tr>
+                <tr>
+                    <td><button onclick="enter(4)">4</button></td>
+                    <td><button onclick="enter(5)">5</button></td>
+                    <td><button onclick="enter(6)">6</button></td>
+                    <td><button onclick="enter('*')">*</button></td>
+                </tr>
+                <tr>
+                    <td><button onclick="enter(1)">1</button></td>
+                    <td><button onclick="enter(2)">2</button></td>
+                    <td><button onclick="enter(3)">3</button></td>
+                    <td><button onclick="enter('+')">+</button></td>
+                </tr>
+                <tr>
+                    <td><button onclick="enter(0)">0</button></td>
+                    <td><button onclick="enter('.')">,</button></td>
+                    <td><button onclick="enter('/')">/</button></td>
+                    <td><button onclick="enter('-')">-</button></td>
+                </tr>
+                <tr>
+                    <td colspan="4"><center><button id="gleich" onclick="rechnen()">=</button></center></td>
+                </tr>
+            </table>
+        </div>
+    </center>
+    <button id="back" onclick="javascript:location.href='lobby.html'">Zurück</button>
+</body>
+</html>

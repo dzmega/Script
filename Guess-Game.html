@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Guess-game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
+    <style>
+        body{
+            background-color: rgb(26, 26, 26);
+            font-family: 'Kdam Thmor Pro', sans-serif;
+            color: white;
+        }
+        button{
+            width: 75px;
+            height: 75px;
+            border-radius: 25px;
+            font-family: 'Kdam Thmor Pro', sans-serif;
+            font-size: 16px;
+            transition-duration: 0.3s;
+            box-shadow: 0 5px #999;
+        }
+        button:hover{
+            background-color: rgb(185, 227, 255);
+        }
+        button:active{
+            background-color: rgb(185, 227, 255);
+            transform: translateY(3px);
+            box-shadow: 0 3px #777;
+        }
+        #start{
+            width: 200px;
+            background-color: rgb(255, 255, 164);
+            transition-duration: 0.3s;
+            box-shadow: 0 7px #999;
+        }
+        #start:hover{
+            background-color: rgb(248, 248, 105);
+        }
+        #start:active{
+            background-color: rgb(248, 248, 105);
+            transform: translateY(4px);
+            box-shadow: 0 4px #777;
+        }
+        #vote{
+            width: 200px;
+            background-color: rgb(255, 93, 93); 
+            transition-duration: 0.3s;
+            box-shadow: 0 7px #999;
+        }
+        #vote:hover{
+            background-color: rgb(236, 53, 53);
+        }
+        #vote:active{
+            background-color: rgb(236, 53, 53);
+            transform: translateY(4px);
+            box-shadow: 0 4px #777;
+        }
+        #back{
+            position: fixed;
+            bottom: 1.25rem; left: 1.25rem;
+            width: 75px;
+            height: 75px;
+            border-radius: 25px;
+            font-family: 'Kdam Thmor Pro', sans-serif;
+            font-size: 16px;
+        }
+        #items{
+            width: 550px;
+            border: 2px solid white;
+            border-radius: 10px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        #show{
+            border: 2px solid white;
+            border-radius: 10px;
+            margin-top: 25px;
+            margin-bottom: 25px;
+            width: 200px;
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+        #versuche{
+            font-size: 54px;
+        }
+        #ergebnis{
+            font-size: 24px;
+        }
+        #headline{
+            font-size: 35px;
+            margin-top: 10px;
+        }
+        #anleitung{
+            width: 550px;
+            height: 300px;
+            border: 2px solid white;
+            border-radius: 10px;
+            margin-top: 50px;
+        }
+        #text{
+            text-align: left;
+            padding-left: 30px;
+            margin-right: 30px;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        var zahl;
+        function generate(){
+            zahl=Math.floor(Math.random()*101);
+            document.getElementById("vote").disabled=false;
+            alert("Eine zufällige Zahl wurde generiert. Viel Spaß!");
+            reset();
+            return zahl;
+        }
+        function reset(){
+            var tries=7;
+            document.getElementById("versuche").innerHTML=tries;
+        }
+        function vergleich(){
+            var tries=document.getElementById("versuche").innerHTML;
+            if(tries==0){
+                alert("Keine Versuche mehr! Die Zahl war "+zahl);
+                document.getElementById("lösung").innerHTML="Verloren!";
+                document.getElementById("vote").disabled=true;
+                document.getElementById("versuche").innerHTML=0;
+            }
+            else{
+                tries--;
+                document.getElementById("versuche").innerHTML=tries;
+                var guess=document.getElementById("eingabe").value;
+                if(guess==zahl){
+                    document.getElementById("vote").disabled=true;
+                    alert("Richtig! Die Zahl war "+zahl);
+                    document.getElementById("lösung").innerHTML="Gewonnen!"; 
+                }
+                else{
+                    if(guess>zahl){
+                        var satz="Die gesuchte Zahl ist kleiner!";
+                        document.getElementById("lösung").innerHTML=satz;
+                    }
+                    else{
+                        var satz="Die gesuchte Zahl ist größer!";
+                        document.getElementById("lösung").innerHTML=satz;
+                    }    
+                }
+                if(guess!=zahl && tries<=0){
+                    document.getElementById("lösung").innerHTML="Verloren!";
+                    document.getElementById("vote").disabled=true;
+                    document.getElementById("versuche").innerHTML=0;
+                    alert("Keine Versuche mehr! Die Zahl war "+zahl);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <center><h2>Guess-game</h2></center>
+    <center>
+        <div id="items">
+            <button id="start" onclick="generate()">Start generator</button><br>
+            <div id="show">
+                Anzahl an Versuchen übrig:
+                <div id="versuche" style="display: inline-block">7</div><br>
+                Zahl eingeben:
+                <input type="text" id="eingabe" size="5"><br>
+            </div>
+            <button id="vote" onclick="vergleich()" disabled>RATEN</button>
+        </div>
+        <div id="ergebnis">
+            Antwort: 
+            <div id="lösung" style="display: inline-block"></div>
+        </div>
+        <div id="anleitung">
+            <div id="headline">Anleitung</div>
+            <div id="text">
+                1. Auf "Start generator" und OK drücken<br>
+                2. Im Feld rechts neben "Zahl eingeben" eine Zahl eingeben<br>
+                3. Auf "RATEN" drücken<br>
+                4. Unten bei "Antwort" erscheint ein Text<br>
+                5. Weiter raten und auf die Anzahl der Versuche achten<br>
+                6. Um eine neue Runde zu starten wieder auf "Start generator" drücken<br>
+            </div>
+        </div>
+    </center>
+    <button id="back" onclick="javascript:location.href='lobby.html'">Zurück</button>
+</body>
+</html>

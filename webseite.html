@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weiterleit-Seite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
+    <style>
+        body{
+            background-color: rgb(26, 26, 26);
+            font-family: 'Kdam Thmor Pro', sans-serif;
+            color: white;
+        }
+        h2{
+            margin: 30px;
+            animation: blinker 1s linear infinite;
+            color: rgb(255, 255, 164);
+        }
+        @keyframes blinker {
+            50%{
+                opacity: 0;
+            }
+        }
+        #items{
+            border: 2px solid white;
+            width: 650px;
+            height: 300px;
+            padding-top: 35px;
+            padding-bottom: 35px;
+            border-radius: 10px;
+        }
+        button{
+            border-radius: 25px;
+            font-family: 'Kdam Thmor Pro', sans-serif;
+        }
+        .beginning{
+            background-color: rgba(212, 87, 87, 0.897);
+            font-family: 'Kdam Thmor Pro', sans-serif;
+            color: white;
+            margin-left: auto;
+            margin-right: auto;
+            width: 300px;
+            height: 75px;
+            text-align: center;
+            border: 2px solid black;
+            border-radius: 10px;
+            font-size: 16px;
+            transition-duration: 0.3s;
+            box-shadow: 0 9px #999;
+            
+        }
+        .beginning:hover{
+            background-color: rgb(236, 53, 53);
+        }
+        .beginning:active{
+            background-color: rgb(236, 53, 53);
+            transform: translateY(5px);
+            box-shadow: 0 5px #777;
+        }
+        #player{
+            margin-top: 45px;
+            margin-bottom: 45px;
+            font-size: 30px;
+            width: 650px;
+            overflow: hidden;
+        }
+        #headline{
+            font-size: 35px;
+            margin-top: 10px;
+        }
+        #anleitung{
+            width: 550px;
+            height: 225px;
+            border: 2px solid white;
+            border-radius: 10px;
+            margin-top: 50px;
+        }
+        #text{
+            text-align: left;
+            padding-left: 30px;
+            margin-right: 30px;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        function start(){
+            var name;
+            var check=0;
+            var dummy="";
+            while(check==0){
+                alert("Bitte geben Sie Ihren Namen ein");
+                name=prompt("Name:");
+                if(name!=dummy){
+                    check=1;
+                    if(name==null){
+                        alert("Geben Sie später Ihren Namen ein");
+                    }
+                    else{
+                        alert("Vielen Dank "+name+" und noch viel Spaß auf meiner Webseite!");
+                        document.getElementById("usname").innerHTML=name;
+                        document.getElementById("lobby").innerHTML=("Zur Lobby");
+                        document.getElementById("lobby").removeAttribute("disabled");
+                    } 
+                }
+            }
+        }
+        var usname;
+        function username(){
+            usname=document.getElementById("usname").innerHTML;
+            //https://lage.us/Javascript-Pass-Variables-to-Another-Page.html
+            sessionStorage.setItem("localname",usname);
+        }
+    </script>
+</head>
+<body>
+    <center>
+        <h2>Bitte auf "Namen eingeben" drücken!</h2>
+        <div id="items">
+            <div id="weiter"><button class="beginning" onclick="start()">Namen eingeben</button><br></div>
+            <div id="player">
+                Spielername: <div id="usname" style="display: inline-block"></div><br>
+            </div>
+            <div id="link"><button class="beginning" id="lobby" onclick="javascript:location.href='lobby.html',username()" disabled>*Deaktiviert*</button></div>
+        </div>
+        <div id="anleitung">
+            <div id="headline">Anleitung</div>
+            <div id="text">
+                1. Auf "Namen eingeben" drücken<br>
+                2. Mindestens 1 Zeichen eingeben<br>
+                3. Um Namen zu ändern auf "Namen eingeben" drücken<br>
+                4. Möchte man zur Lobby gelangen auf "Zur Lobby" drücken => Man muss aber bereits einen Namen eingegeben haben
+            </div>
+        </div>
+    </center>
+</body>
+</html>

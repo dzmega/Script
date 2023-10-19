@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lobby</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
+    <style>
+        body{
+            background-color: rgb(26, 26, 26);
+            font-family: 'Kdam Thmor Pro', sans-serif;
+            color: white;
+        }
+        h2{
+            margin: 30px;
+            animation: blinker 1s linear infinite;
+            color: rgb(255, 255, 164);
+        }
+        @keyframes blinker {
+            50%{
+                opacity: 0;
+            }
+        }
+        #player{
+            margin-bottom: 45px;
+            font-size: 30px;
+        }
+        .container{
+            display:grid;
+            width: 75%;
+            height: 55%;
+            border: 2px solid ;
+            grid-template-columns: repeat(3, 1fr);
+            padding: 10px;
+            border-radius: 20px;
+            margin-top: 45px;
+            border-color: rgb(255, 255, 164);
+        }
+        .content{
+            border: 2px solid white;
+            margin: 10px;
+            border-radius: 10px;
+            border-color: rgb(255, 255, 164);
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        .bild{
+            max-width: 100%;
+            height: 250px;
+        }
+        button{
+            border-radius: 25px;
+            font-family: 'Kdam Thmor Pro', sans-serif;
+        }
+        .btn{
+            background-color: rgba(212, 87, 87, 0.897);
+            font-family: 'Kdam Thmor Pro', sans-serif;
+            color: white;
+            margin-left: auto;
+            margin-right: auto;
+            width: 150px;
+            height: 50px;
+            text-align: center;
+            border: 2px solid black;
+            border-radius: 10px;
+            font-size: 16px;
+            transition-duration: 0.3s;
+            box-shadow: 0 9px #999;
+        }
+        .btn:hover{
+            background-color: rgb(236, 53, 53);
+        }
+        .btn:active{
+            background-color: rgb(236, 53, 53);
+            transform: translateY(5px);
+            box-shadow: 0 5px #777;
+        }
+        #beschreibung{
+            margin-top: 30px;
+            font-size: 24px;
+        }
+        #line{
+            font-size: 24px;
+        }
+    </style>
+    <script>
+        function lobbyname(){
+            //https://lage.us/Javascript-Pass-Variables-to-Another-Page.html
+            var usname=sessionStorage.getItem("localname");
+            document.getElementById("usname").innerHTML=usname;
+        }
+    </script>
+</head>
+<body onload="lobbyname()">
+    <center>
+        <h2>Willkommen in der Lobby!</h2>
+        <div id="player">
+            Spielername:
+            <div id="usname" style="display: inline-block"></div><br>
+        </div>
+        
+    </center>
+    <center>
+        <div class="container">
+            <div class="content">
+                <p id="line">Guess-Game</p>
+                <img class="bild" src="Pic_Guess.png">
+                <p><button id="starttiktaktoe" class="btn" onclick="javascript:location.href='Guess-Game.html'">Starten</button></p>
+                <p id="beschreibung">Man muss eine geheime Zahl mit einer bestimmten Anzahl an versuchen herausfinden</p>
+            </div>
+            <div class="content">
+                <p id="line">Taschenrechner</p>
+                <img class="bild" src="Pic_Taschenrechner.png">
+                <p><button id="starttaschenrechner" class="btn" onclick="javascript:location.href='Taschenrechner.html'">Starten</button></p>
+                <p id="beschreibung">Dient zum lösen von mathematischen Rechnungen</p>
+            </div>
+            <div class="content">
+                <p id="line">Clicker-Counter</p>
+                <img class="bild" src="Pic_Counter.png">
+                <p><button id="startsnake" class="btn" onclick="javascript:location.href='Clicker-Counter.html'">Starten</button></p>
+                <p id="beschreibung">Zählt die Anzahl deiner Klicks. Jedoch gibt es zusätzliche Features</p>
+            </div>
+        </div>
+    </center>
+</body>
+</html>

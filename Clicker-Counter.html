@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Clicker-Counter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
+    <style>
+        body{
+            background-color: rgb(26, 26, 26);
+            font-family: 'Kdam Thmor Pro', sans-serif;
+            color: white;
+        }
+        button{
+            width: 200px;
+            height: 100px;
+            border-radius: 100px;
+            background-color: rgb(255, 255, 164);
+            font-family: 'Kdam Thmor Pro', sans-serif;
+            font-size: 20px;
+            transition-duration: 0.3s;
+            box-shadow: 0 7px #999;
+        }
+        button:hover{
+            background-color: rgb(248, 248, 105);
+        }
+        button:active{
+            background-color: rgb(248, 248, 105);
+            transform: translateY(4px);
+            box-shadow: 0 4px #777;
+        }
+        #back:hover{
+            background-color: rgb(185, 227, 255);
+        }
+        #number{
+            font-size: 30px;
+        }
+        #back{
+            position: fixed;
+            bottom: 1.25rem; left: 1.25rem;
+            width: 75px;
+            height: 75px;
+            border-radius: 25px;
+            font-family: 'Kdam Thmor Pro', sans-serif;
+            font-size: 16px;
+            background-color: white;
+            transition-duration: 0.3s;
+            box-shadow: 0 5px #999;
+        }
+        #back:hover{
+            background-color: rgb(185, 227, 255);
+        }
+        #back:active{
+            background-color: rgb(185, 227, 255);
+            transform: translateY(3px);
+            box-shadow: 0 3px #777;
+        }
+        #anleitung{
+            width: 550px;
+            height: 225px;
+            border: 2px solid white;
+            border-radius: 10px;
+            margin-top: 50px;
+        }
+        #headline{
+            font-size: 35px;
+            margin-top: 10px;
+        }
+        #text{
+            text-align: left;
+            padding-left: 30px;
+            margin-right: 30px;
+            margin-top: 20px;
+        }
+        img{
+            width: 20%;
+            height: 20%;
+        }
+    </style>
+    <script>
+        var flag=false;
+        document.onkeydown=function counter2(){
+            if(flag==false){
+                flag=true;
+                var zahl=parseInt(document.getElementById("number").innerHTML);
+                zahl++;
+                document.getElementById("number").innerHTML=zahl;
+                document.getElementById("cat1").src="popcat2.png";
+            }
+        };
+        document.onkeyup=function counter2(){
+            flag=false;
+            document.getElementById("cat1").src="popcat1.png";
+        };
+        function keyHandler(){
+            document.addEventListener("click",counter);
+        }
+        function counter(){
+            var zahl=parseInt(document.getElementById("number").innerHTML);
+            zahl++;
+            document.getElementById("number").innerHTML=zahl;
+        }
+    </script>
+</head>
+<body onload="keyHandler()">
+    <center>
+        <h2>Clicker-Counter</h2>
+        <button id="button" onclick="counter()">Doppel</button>
+        <p id="number">0</p>
+        <img src="popcat1.png" id="cat1">
+    </center>
+    <center>
+        <div id="anleitung">
+            <div id="headline">Anleitung</div>
+            <div id="text">
+                1. Irgendwo auf der Seite klicken und man bekommt +1<br>
+                2. Wenn man auf "Doppel" drückt erhält man +2<br>
+                3. Man kann auch die Tasten der Tastatur drücken. Allerding bekommt man nur 1 punkt dazu. Dadurch öffnet sich der Mund von der Katze.
+            </div>
+        </div>
+    </center>
+    <button id="back" onclick="javascript:location.href='lobby.html'">Zurück</button>
+</body>
+</html>
